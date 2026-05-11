@@ -4,7 +4,7 @@ import { ObjectId } from 'mongodb';
 // Get all contacts
 export const getAllContacts = async (req, res) => {
   try {
-    const db = getDb().db(); // If you named your database something specific in Atlas, put it inside db('YourDbName')
+    const db = getDb().db('contacts'); // If you named your database something specific in Atlas, put it inside db('YourDbName')
     const lists = await db.collection('contacts').find().toArray();
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
@@ -17,7 +17,7 @@ export const getAllContacts = async (req, res) => {
 export const getSingleContact = async (req, res) => {
   try {
     const userId = new ObjectId(req.params.id);
-    const db = getDb().db();
+    const db = getDb().db('contacts');
     const lists = await db.collection('contacts').find({ _id: userId }).toArray();
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists[0]);
