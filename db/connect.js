@@ -5,19 +5,20 @@ dotenv.config();
 
 let _db;
 
-export const initDb = (callback) => {
+export const initDb = async (callback) => {
   if (_db) {
     console.log('Db is already initialized!');
     return callback(null, _db);
   }
-  MongoClient.connect(process.env.MONGODB_URI)
-    .then((client) => {
-      _db = client;
-      callback(null, _db);
-    })
-    .catch((err) => {
-      callback(err);
-    });
+  try {
+    const client = await MongoClient.connect(process.env.MONGODB_URI);
+    _db = client;
+    console.log('Connected successfully to MongoDB');
+    callback(null, _db);
+  } catch (err) {
+    console.log('Connection error:', err.message);
+    callback(err);
+  }
 };
 
 export const getDb = () => {
