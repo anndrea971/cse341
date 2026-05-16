@@ -5,7 +5,7 @@ import { ObjectId } from 'mongodb';
 export const getAllContacts = async (req, res) => {
   try {
     const db = getDb().db('database');
-    const lists = await db.collection('contacts').find().toArray(); // ✅ changed 'database' to 'contacts'
+    const lists = await db.collection('contacts').find().toArray(); 
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
   } catch (error) {
@@ -18,7 +18,7 @@ export const getSingleContact = async (req, res) => {
   try {
     const userId = new ObjectId(req.params.id);
     const db = getDb().db('database');
-    const lists = await db.collection('contacts').find({ _id: userId }).toArray(); // ✅ changed 'database' to 'contacts'
+    const lists = await db.collection('contacts').find({ _id: userId }).toArray(); 
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists[0]);
   } catch (error) {
