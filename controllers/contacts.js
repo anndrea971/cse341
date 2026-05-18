@@ -3,15 +3,9 @@ import { ObjectId } from 'mongodb';
 
 const getCollection = () => getDb().db('database').collection('contacts');
 
-// Get all contacts
 export const getAllContacts = async (req, res) => {
   try {
-<<<<<<< HEAD
     const lists = await getCollection().find().toArray();
-=======
-    const db = getDb().db('database');
-    const lists = await db.collection('contacts').find().toArray(); 
->>>>>>> 6435070c345b7b9de9be6f9fca3819e7192eadd3
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
   } catch (error) {
@@ -19,16 +13,10 @@ export const getAllContacts = async (req, res) => {
   }
 };
 
-// Get a single contact by ID
 export const getSingleContact = async (req, res) => {
   try {
     const userId = new ObjectId(req.params.id);
-<<<<<<< HEAD
     const contact = await getCollection().findOne({ _id: userId });
-=======
-    const db = getDb().db('database');
-    const lists = await db.collection('contacts').find({ _id: userId }).toArray(); 
->>>>>>> 6435070c345b7b9de9be6f9fca3819e7192eadd3
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(contact);
   } catch (error) {
@@ -36,7 +24,6 @@ export const getSingleContact = async (req, res) => {
   }
 };
 
-// Create a new contact
 export const createContact = async (req, res) => {
   try {
     const { firstName, lastName, email, favoriteColor, birthday } = req.body;
@@ -50,7 +37,6 @@ export const createContact = async (req, res) => {
   }
 };
 
-// Update a contact
 export const updateContact = async (req, res) => {
   try {
     const userId = new ObjectId(req.params.id);
@@ -68,7 +54,6 @@ export const updateContact = async (req, res) => {
   }
 };
 
-// Delete a contact
 export const deleteContact = async (req, res) => {
   try {
     const userId = new ObjectId(req.params.id);
