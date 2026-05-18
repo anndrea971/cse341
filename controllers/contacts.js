@@ -6,7 +6,12 @@ const getCollection = () => getDb().db('database').collection('contacts');
 // Get all contacts
 export const getAllContacts = async (req, res) => {
   try {
+<<<<<<< HEAD
     const lists = await getCollection().find().toArray();
+=======
+    const db = getDb().db('database');
+    const lists = await db.collection('contacts').find().toArray(); 
+>>>>>>> 6435070c345b7b9de9be6f9fca3819e7192eadd3
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
   } catch (error) {
@@ -18,7 +23,12 @@ export const getAllContacts = async (req, res) => {
 export const getSingleContact = async (req, res) => {
   try {
     const userId = new ObjectId(req.params.id);
+<<<<<<< HEAD
     const contact = await getCollection().findOne({ _id: userId });
+=======
+    const db = getDb().db('database');
+    const lists = await db.collection('contacts').find({ _id: userId }).toArray(); 
+>>>>>>> 6435070c345b7b9de9be6f9fca3819e7192eadd3
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(contact);
   } catch (error) {
